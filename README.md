@@ -56,9 +56,10 @@ city_name = zomato.get_city_name(city_ID)
 - Takes City ID and number of collections as input.
 - If number of collections is not specified, returns all Zomato Collections.
 - Returns a dictionary of Collection Name and Collection URL.
-- Can raise ```InvalidCityId``` exception.
+- Can raise ```InvalidCityId``` and ```LimitNotInteger``` exceptions.
 ```python
 #city_ID must be an integer.
+#limit must be an integer.
 
 # Returns all the Zomato Collections in a city
 collections_dictionary = zomato.get_collections(city_ID)
