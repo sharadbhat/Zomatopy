@@ -47,6 +47,7 @@ class Zomato:
         self.is_rate_exceeded(a)
 
         if len(a['location_suggestions']) == 0:
+            raise ValueError('InvalidCityName')
         elif 'name' in a['location_suggestions'][0]:
             city_name = city_name.replace('%20', ' ')
             if str(a['location_suggestions'][0]['name']).lower() == str(city_name).lower():
