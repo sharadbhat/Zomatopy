@@ -23,7 +23,73 @@ config={
     
 zomato = zomatopy.initialize_app(config)
 ```
+## Methods
+### Common
+#### Getting all Category IDs and the category names
+- Takes no inputs.
+- Returns a dictionary of Category IDs and corresponding Category Names.
+```python
+category_dictionary = zomato.get_categories()
+```
 
+#### Getting ID for a particular city
+- Takes City Name as input.
+- Returns the City ID of the city.
+- Can raise ```InvalidCityName``` exception.
+```python
+#city_name must be a string without numbers or special characters.
+
+city_ID = zomato.get_city_ID(city_name)
+```
+
+#### Getting Name for a particular City ID
+- Takes City ID as input.
+- Returns name of the city with that ID.
+- Can raise ```InvalidCityId``` exception.
+```python
+#city_ID must be an integer.
+
+city_name = zomato.get_city_name(city_ID)
+```
+
+#### Getting the Zomato Collections in a city
+- Takes City ID and number of collections as input.
+- If number of collections is not specified, returns all Zomato Collections.
+- Returns a dictionary of Collection Name and Collection URL.
+- Can raise ```InvalidCityId``` exception.
+```python
+#city_ID must be an integer.
+
+# Returns all the Zomato Collections in a city
+collections_dictionary = zomato.get_collections(city_ID)
+
+#Returns 'limit' number of collections.
+collections_dictionary = zomato.get_collections(city_ID, limit=number_of_collections)
+```
+
+#### Getting the cuisines in a city
+- Takes City ID as input.
+- Returns a dictionary of Cuisine ID and corresponding Cuisine Names.
+- Can raise ```InvalidCityId```
+```python
+#city_ID must be an integer.
+
+cuisine_dictionary = get_cuisines(city_ID)
+```
+
+#### Getting all establishment types in a city.
+- Takes City ID as input.
+- Returns a dictionary of Establishment Type ID and corresponding Establishment Type Name.
+- Can raise ```InvalidCityId```
+```python
+#city_ID must be an integer.
+
+establishment_types_dictionary = get_establishment_types(city_ID)
+```
+### Restaurant
+#### Getting the daily menu of a restaurant
+- Takes Restaurant ID as input.
+- Can raise ```InvalidRestaurantId``` exception.
 ## Exceptions
 
 #### InvalidKey
@@ -48,6 +114,11 @@ ValueError: InvalidCityName
 - If the Restaurant ID is not present in the Zomato database.
 ```
 ValueError: InvalidRestaurantId
+```
+#### LimitNotInteger
+- If the limit parameter provided for the ```get_collections()``` method is not an integer.
+```
+ValueError: LimitNotInteger
 ```
 #### ApiLimitExceeded
 - If the daily call limit of the API Key is exceeded.
