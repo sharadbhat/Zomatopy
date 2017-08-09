@@ -35,8 +35,8 @@ class Zomato:
         """
         Returns the ID for the city given as input.
         """
-        if city_name.isalpha() == True:
-            raise ValueError('invalid_city_name')
+        if city_name.isalpha() == False:
+            raise ValueError('InvalidCityName')
         city_name = city_name.split(' ')
         city_name = '%20'.join(city_name)
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
@@ -47,7 +47,7 @@ class Zomato:
         self.is_rate_exceeded(a)
 
         if len(a['location_suggestions']) == 0:
-            raise Exception('invalid_city_name')
+            raise Exception('InvalidCityId')
         elif 'name' in a['location_suggestions'][0]:
             city_name = city_name.replace('%20', ' ')
             if str(a['location_suggestions'][0]['name']).lower() == str(city_name).lower():
@@ -60,7 +60,7 @@ class Zomato:
         """
         city_ID = str(city_ID)
         if city_ID.isnumeric() == False:
-            raise ValueError('invalid_city_id')
+            raise ValueError('InvalidCityId')
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "cities?city_ids=" + str(city_ID), headers=headers).content).decode("utf-8")
         a = ast.literal_eval(r)
@@ -69,11 +69,13 @@ class Zomato:
         self.is_rate_exceeded(a)
 
         if a['location_suggestions'][0]['country_name'] == "":
-            raise ValueError('invalid_city_id')
+            raise ValueError('InvalidCityId')
         else:
             temp_city_ID = a['location_suggestions'][0]['id']
             if temp_city_ID == str(city_ID):
                 return a['location_suggestions'][0]['name']
+            else:
+                raise ValueError('InvalidCityId')
 
 
 
@@ -84,13 +86,13 @@ class Zomato:
         """
         city_ID = str(city_ID)
         if city_ID.isnumeric() == False:
-            raise ValueError('invalid_city_id')
+            raise ValueError('InvalidCityId')
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         if limit == None:
             r = (requests.get(base_url + "collections?city_id=" + str(city_ID), headers=headers).content).decode("utf-8")
         else:
             if str(limit).isalpha() == True:
-                raise ValueError('limit_must_be_integer')
+                raise ValueError('LimitNotInteger')
             else:
                 r = (requests.get(base_url + "collections?city_id=" + str(city_ID) + "&count=" + str(limit), headers=headers).content).decode("utf-8")
         a = ast.literal_eval(r)
@@ -112,7 +114,7 @@ class Zomato:
         """
         city_ID = str(city_ID)
         if city_ID.isnumeric() == False:
-            raise ValueError('invalid_city_id')
+            raise ValueError('InvalidCityId')
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "cuisines?city_id=" + str(city_ID), headers=headers).content).decode("utf-8")
         a = ast.literal_eval(r)
@@ -121,7 +123,7 @@ class Zomato:
         self.is_rate_exceeded(a)
 
         if len(a['cuisines']) == 0:
-            raise ValueError('invalid_city_id')
+            raise ValueError('InvalidCityId')
         temp_cuisines = {}
         cuisines = {}
         for cuisine in a['cuisines']:
@@ -140,7 +142,7 @@ class Zomato:
         """
         city_ID = str(city_ID)
         if city_ID.isnumeric() == False:
-            raise ValueError('invalid_city_id')
+            raise ValueError('InvalidCityId')
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "establishments?city_id=" + str(city_ID), headers=headers).content).decode("utf-8")
         a = ast.literal_eval(r)
@@ -177,7 +179,7 @@ class Zomato:
         """
         if 'code' in a:
             if a['code'] == 403:
-                raise ValueError('invalid_key')
+                raise ValueError('InvalidKey')
 
 
 
@@ -188,4 +190,4 @@ class Zomato:
         """
         if 'code' in a:
             if a['code'] == 440:
-                raise Exception('API_limit_exceeded')
+                raise Exception('ApiLimitExceeded')
