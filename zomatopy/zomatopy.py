@@ -10,7 +10,7 @@ def initialize_app(config):
 
 class Zomato:
     def __init__(self, config):
-        self.user_key =config["user_key"]
+        self.user_key = config["user_key"]
 
 
     def get_categories(self):
