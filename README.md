@@ -5,7 +5,6 @@ A Python wrapper for the Zomato API v2.1
 ```
 pip install zomatopy
 ```
-(Not yet uploaded to Pypi - will not work)
 
 ## Getting Started
 ### Python Version
@@ -71,7 +70,7 @@ collections_dictionary = zomato.get_collections(city_ID, limit=number_of_collect
 #### Getting the cuisines in a city
 - Takes City ID as input.
 - Returns a dictionary of Cuisine ID and corresponding Cuisine Names.
-- Can raise ```InvalidCityId```
+- Can raise ```InvalidCityId``` exception.
 ```python
 #city_ID must be an integer.
 
@@ -88,9 +87,45 @@ cuisine_dictionary = get_cuisines(city_ID)
 establishment_types_dictionary = get_establishment_types(city_ID)
 ```
 ### Restaurant
-#### Getting the daily menu of a restaurant
+
+#### Getting the nearby restaurants
+- Takes Latitude and Longitude as inputs.
+- Returns a dictionary of Restaurant IDs and their corresponding Zomato URLs.
+- Can raise ```InvalidLatitudeOrLongitude``` exception.
+```python
+#latitude and longitude must be float or string representation of a float.
+
+restaurant_dictionary = get_nearby_restaurants(latitude, longitude)
+```
+
+#### Getting the details of a particular restaurant
 - Takes Restaurant ID as input.
-- Can raise ```InvalidRestaurantId``` exception.
+- Returns a dictionary of restaurant details.
+- Can raise a ```InvalidRestaurantId``` exception.
+```python
+#restaurant_ID must be an integer.
+
+restaurant_details = get_restaurant(restaurant_ID)
+
+#restaurant_details.name gives the restaurant name.
+#restaurant_details.url gives the restaurant Zomato URL.
+#restaurant_details.location gives the restaurant location.
+#restaurant_details.city gives the restaurant city name.
+#restaurant_details.city_ID gives the restaurant city's ID.
+#restaurant_details.user_rating gives the restaurant rating.
+```
+
+#### Searching restaurants based on query, latitude/longitude and/or cuisine IDs
+- Takes either query, latitude and longitude or cuisine as input (at least one is necessary).
+- limit can be specified to give only those many restaurant results (limit=5 by default).
+- Returns a list of Restaurant IDs.
+- Can raise a ```LimitNotInteger``` exception.
+```python
+#latitude and longitude must be float or string representation of a float.
+#multiple cuisine IDs can be specified by separating with commas. Must be a string.
+
+restaurant_list = restaurant_search(query="Buffet", cuisines="1, 25")
+```
 ## Exceptions
 
 #### InvalidKey
@@ -116,8 +151,10 @@ ValueError: InvalidCityName
 ```
 ValueError: InvalidRestaurantId
 ```
+#### InvalidLatitudeOrLongitude
+- If the latitude or longitude value provided in not a number or string representation of a number.
 #### LimitNotInteger
-- If the limit parameter provided for the ```get_collections()``` method is not an integer.
+- If the limit parameter provided for the ```get_collections()``` or ```restaurant_search()``` methods is not an integer.
 ```
 ValueError: LimitNotInteger
 ```
