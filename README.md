@@ -14,7 +14,7 @@ This wrapper was written for Python 3 and might not work well with Python 2.
 For use with only user based authentication we can create the following configuration:
 
 ```python
-import zomatopy
+from Zomatopy import zomatopy
 
 config={
   "user_key"="ZOMATO_API_KEY"
