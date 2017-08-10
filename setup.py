@@ -2,7 +2,7 @@ from setptools import setup
 
 setup(
     name='Zomatopy',
-    version='1.0.0',
+    version='1.0.2',
     url='https://github.com/sharadbhat/Zomatopy',
     description='A simple python wrapper for the Zomato API',
     author='Sharad Bhat',
