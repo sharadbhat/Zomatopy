@@ -1,8 +1,8 @@
-from setptools import setup
+from setuptools import setup
 
 setup(
-    name='Zomatopy',
-    version='1.0.4',
+    name='zomatopy',
+    version='1.0.5',
     url='https://github.com/sharadbhat/Zomatopy',
     description='A simple python wrapper for the Zomato API',
     author='Sharad Bhat',
