@@ -153,6 +153,9 @@ ValueError: InvalidRestaurantId
 ```
 #### InvalidLatitudeOrLongitude
 - If the latitude or longitude value provided in not a number or string representation of a number.
+```
+ValueError: InvalidLatitudeOrLongitude
+```
 #### LimitNotInteger
 - If the limit parameter provided for the ```get_collections()``` or ```restaurant_search()``` methods is not an integer.
 ```
