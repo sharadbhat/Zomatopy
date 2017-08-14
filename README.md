@@ -2,7 +2,7 @@
 A Python wrapper for the Zomato API v2.1
 
 ## Installation
-```
+```bash
 pip install zomatopy
 ```
 
