@@ -5,7 +5,7 @@ A Python wrapper for the Zomato API v2.1
 ```bash
 pip install zomatopy
 ```
-Or download from [here](http://github.com/sharadbhat/Zomatopy), and then just install the package using
+Or download the source code from [here](http://github.com/sharadbhat/Zomatopy), and then just install the package using
 ```bash
 python setup.py install
 ```
