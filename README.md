@@ -2,10 +2,12 @@
 A Python wrapper for the Zomato API v2.1
 
 ## Installation
+
 ```bash
 pip install zomatopy
 ```
 Or download the source code from [here](http://github.com/sharadbhat/Zomatopy), and then just install the package using
+
 ```bash
 python setup.py install
 ```
@@ -43,7 +45,7 @@ category_dictionary = zomato.get_categories()
 - Can raise ```InvalidCityName``` exception.
 
 ```python
-#city_name must be a string without numbers or special characters.
+# city_name must be a string without numbers or special characters.
 
 city_ID = zomato.get_city_ID(city_name)
 ```
@@ -54,7 +56,7 @@ city_ID = zomato.get_city_ID(city_name)
 - Can raise ```InvalidCityId``` exception.
 
 ```python
-#city_ID must be an integer.
+# city_ID must be an integer.
 
 city_name = zomato.get_city_name(city_ID)
 ```
@@ -66,13 +68,13 @@ city_name = zomato.get_city_name(city_ID)
 - Can raise ```InvalidCityId``` and ```LimitNotInteger``` exceptions.
 
 ```python
-#city_ID must be an integer.
-#limit must be an integer.
+# city_ID must be an integer.
+# limit must be an integer.
 
 # Returns all the Zomato Collections in a city
 collections_dictionary = zomato.get_collections(city_ID)
 
-#Returns 'limit' number of collections.
+# Returns 'limit' number of collections.
 collections_dictionary = zomato.get_collections(city_ID, limit=number_of_collections)
 ```
 
@@ -82,7 +84,7 @@ collections_dictionary = zomato.get_collections(city_ID, limit=number_of_collect
 - Can raise ```InvalidCityId``` exception.
 
 ```python
-#city_ID must be an integer.
+# city_ID must be an integer.
 
 cuisine_dictionary = get_cuisines(city_ID)
 ```
@@ -93,7 +95,7 @@ cuisine_dictionary = get_cuisines(city_ID)
 - Can raise ```InvalidCityId``` exception.
 
 ```python
-#city_ID must be an integer.
+# city_ID must be an integer.
 
 establishment_types_dictionary = get_establishment_types(city_ID)
 ```
@@ -105,7 +107,7 @@ establishment_types_dictionary = get_establishment_types(city_ID)
 - Can raise ```InvalidLatitudeOrLongitude``` exception.
 
 ```python
-#latitude and longitude must be float or string representation of a float.
+# latitude and longitude must be float or string representation of a float.
 
 restaurant_dictionary = get_nearby_restaurants(latitude, longitude)
 ```
@@ -116,16 +118,16 @@ restaurant_dictionary = get_nearby_restaurants(latitude, longitude)
 - Can raise a ```InvalidRestaurantId``` exception.
 
 ```python
-#restaurant_ID must be an integer.
+# restaurant_ID must be an integer.
 
 restaurant_details = get_restaurant(restaurant_ID)
 
-#restaurant_details.name gives the restaurant name.
-#restaurant_details.url gives the restaurant Zomato URL.
-#restaurant_details.location gives the restaurant location.
-#restaurant_details.city gives the restaurant city name.
-#restaurant_details.city_ID gives the restaurant city's ID.
-#restaurant_details.user_rating gives the restaurant rating.
+# restaurant_details.name gives the restaurant name.
+# restaurant_details.url gives the restaurant Zomato URL.
+# restaurant_details.location gives the restaurant location.
+# restaurant_details.city gives the restaurant city name.
+# restaurant_details.city_ID gives the restaurant city's ID.
+# restaurant_details.user_rating gives the restaurant rating.
 ```
 
 #### Searching restaurants based on query, latitude/longitude and/or cuisine IDs
@@ -135,8 +137,8 @@ restaurant_details = get_restaurant(restaurant_ID)
 - Can raise a ```LimitNotInteger``` exception.
 
 ```python
-#latitude and longitude must be float or string representation of a float.
-#multiple cuisine IDs can be specified by separating with commas. Must be a string.
+# latitude and longitude must be float or string representation of a float.
+# multiple cuisine IDs can be specified by separating with commas. Must be a string.
 
 restaurant_list = restaurant_search(query="Buffet", cuisines="1, 25")
 ```
