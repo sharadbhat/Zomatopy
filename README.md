@@ -24,7 +24,7 @@ For use with only user based authentication we can create the following configur
 import zomatopy
 
 config={
-  "user_key"="ZOMATO_API_KEY"
+  "user_key":"ZOMATO_API_KEY"
 }
     
 zomato = zomatopy.initialize_app(config)
