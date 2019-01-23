@@ -16,4 +16,5 @@ setup(
     install_requires=[
         'requests==2.11.1'
     ]
+    print("hello")
 )
