@@ -14,6 +14,6 @@ setup(
     ],
     keywords='Zomato',
     install_requires=[
-        'requests==2.11.1'
+        'requests==2.20.0'
     ]
 )
