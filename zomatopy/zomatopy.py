@@ -1,5 +1,5 @@
 import requests
-import ast
+import json
 
 base_url = "https://developers.zomato.com/api/v2.1/"
 
@@ -20,7 +20,7 @@ class Zomato:
         """
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "categories", headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         self.is_key_invalid(a)
         self.is_rate_exceeded(a)
@@ -43,7 +43,7 @@ class Zomato:
         city_name = '%20'.join(city_name)
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "cities?q=" + city_name, headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         self.is_key_invalid(a)
         self.is_rate_exceeded(a)
@@ -67,7 +67,7 @@ class Zomato:
 
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "cities?city_ids=" + str(city_ID), headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         self.is_key_invalid(a)
         self.is_rate_exceeded(a)
@@ -96,7 +96,7 @@ class Zomato:
                 raise ValueError('LimitNotInteger')
             else:
                 r = (requests.get(base_url + "collections?city_id=" + str(city_ID) + "&count=" + str(limit), headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         self.is_key_invalid(a)
         self.is_rate_exceeded(a)
@@ -118,7 +118,7 @@ class Zomato:
 
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "cuisines?city_id=" + str(city_ID), headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         self.is_key_invalid(a)
         self.is_rate_exceeded(a)
@@ -146,7 +146,7 @@ class Zomato:
 
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "establishments?city_id=" + str(city_ID), headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         self.is_key_invalid(a)
         self.is_rate_exceeded(a)
@@ -179,7 +179,7 @@ class Zomato:
 
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "geocode?lat=" + str(latitude) + "&lon=" + str(longitude), headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         nearby_restaurants = {}
         for nearby_restaurant in a['nearby_restaurants']:
@@ -198,7 +198,7 @@ class Zomato:
 
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "restaurant?res_id=" + str(restaurant_ID), headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         if 'code' in a:
             if a['code'] == 404:
@@ -226,7 +226,7 @@ class Zomato:
             raise ValueError('LimitNotInteger')
         headers = {'Accept': 'application/json', 'user-key': self.user_key}
         r = (requests.get(base_url + "search?q=" + str(query) + "&count=" + str(limit) + "&lat=" + str(latitude) + "&lon=" + str(longitude) + "&cuisines=" + str(cuisines), headers=headers).content).decode("utf-8")
-        a = ast.literal_eval(r)
+        a = json.loads(r)
 
         restaurants = []
 
